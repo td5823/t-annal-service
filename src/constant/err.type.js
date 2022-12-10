@@ -9,9 +9,34 @@ module.exports = {
     message: '用户已经存在',
     result: '',
   },
-  userRegisterErr: {
+  userRegisterError: {
     code: '10003',
-    message: '用户注册失败',
+    message: '用户注册错误',
     result: '',
   },
+  userDoesNotExist: {
+    code: '10004',
+    message: '用户不存在',
+    result: '',
+  },
+  userLoginError: {
+    code: '10005',
+    message: '用户登录失败',
+    result: '',
+  },
+  invalidPassword: {
+    code: '10006',
+    message: '密码不匹配',
+    result: '',
+  },
+  invalidToken:{
+    code: '10101',
+    message: '无效token',
+    result: '',
+  },
+  tokenExpiredError:{
+    code: '10101',
+    message: 'token过期',
+    result: '',
+  }
 }
