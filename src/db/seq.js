@@ -15,7 +15,7 @@ const seq = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
 
 seq
   .authenticate()
-  .then(() => {
+  .then((...other) => {
     console.log('数据库连接成功')
   })
   .catch((err) => {
