@@ -1,5 +1,10 @@
 module.exports = {
   userFormateError: {
+    code: '10000',
+    message: '获取公钥失败',
+    result: '',
+  },
+  userFormateError: {
     code: '10001',
     message: '用户名或密码为空',
     result: '',

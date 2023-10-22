@@ -1,4 +1,6 @@
 const bcrypt = require('bcryptjs')
+const crypto = require('crypto');
+const fs = require('fs');
 
 const { getUerInfo } = require('../service/user.service')
 const {
@@ -9,6 +11,30 @@ const {
   userLoginError,
   invalidPassword,
 } = require('../constant/err.type')
+
+const createPublicKey = async (ctx, next) => {
+  // 生成 RSA 密钥对
+  const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+    modulusLength: 2048, // 密钥长度
+    publicKeyEncoding: {
+      type: 'spki',
+      format: 'pem'
+    },
+    privateKeyEncoding: {
+      type: 'pkcs8',
+      format: 'pem'
+    }
+  });
+  
+  // 将密钥对保存到文件
+  fs.writeFileSync('private_key.pem', privateKey);
+  fs.writeFileSync('public_key.pem', publicKey);
+  
+  console.log('RSA 密钥对已生成并保存到 private_key.pem 和 public_key.pem 文件中');
+  
+
+  await next()
+}
 
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
@@ -85,6 +111,7 @@ const verifyLogin = async (ctx, next) => {
 }
 
 module.exports = {
+  createPublicKey,
   userValidator,
   verifyUser,
   crpytPassword,
